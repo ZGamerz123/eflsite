@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>5 Minute Timer</title>
+<style>
+#timer {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  font-family: sans-serif;
+  color: white;
+  margin-bottom: 400px;
+}
+
+#controls {
+  text-align: center;
+}
+
+#start-stop {
+  margin-right: 10px;
+}
+</style>
+</head>
+<body>
+ <div id="timer">
+   <span id="minutes">05</span>:<span id="seconds">00</span>
+ </div>
+ <div id="controls">
+   <button id="start-stop">Start</button>
+   <button id="reset">Reset</button>
+ </div>
+
+ <script>
+ const minutes = document.getElementById('minutes');
+const seconds = document.getElementById('seconds');
+const startStopButton = document.getElementById('start-stop');
+const resetButton = document.getElementById('reset');
+
+let intervalId;
+let isRunning = false;
+
+function startTimer() {
+  if (isRunning) {
+    return;
+  }
+
+  isRunning = true;
+
+  intervalId = setInterval(() => {
+    let minutesValue = parseInt(minutes.textContent);
+    let secondsValue = parseInt(seconds.textContent);
+
+    if (secondsValue === 0) {
+      minutesValue--;
+      secondsValue = 59;
+    } else {
+      secondsValue--;
+    }
+
+    minutes.textContent = minutesValue < 10 ? `0${minutesValue}` : minutesValue;
+    seconds.textContent = secondsValue < 10 ? `0${secondsValue}` : secondsValue;
+
+    if (minutesValue === 0 && secondsValue === 0) {
+      clearInterval(intervalId);
+      isRunning = false;
+    }
+  }, 1000);
+}
+
+function stopTimer() {
+  clearInterval(intervalId);
+  isRunning = false;
+}
+
+function resetTimer() {
+  clearInterval(intervalId);
+  isRunning = false;
+  minutes.textContent = '05';
+  seconds.textContent = '00';
+}
+
+startStopButton.addEventListener('click', () => {
+  if (isRunning) {
+    stopTimer();
+    startStopButton.textContent = 'Start';
+  } else {
+    startTimer();
+    startStopButton.textContent = 'Stop';
+  }
+});
+
+resetButton.addEventListener('click', resetTimer);</script>
+</body>
+</html>
