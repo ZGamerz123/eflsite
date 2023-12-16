@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Score System</title>
+ <style>
+   body {
+     font-family: sans-serif;
+   }
+
+   #score {
+     font-size: 36px;
+     margin-bottom: 400px;
+     font-family: sans-serif;
+  font-weight: bold;
+   color: white;
+   }
+
+   .buttons {
+     display: flex;
+     justify-content: center;
+   }
+
+   .button {
+     margin-right: 10px;
+     padding: 10px 20px;
+     border: 1px solid #ccc;
+     border-radius: 5px;
+     background-color: #eee;
+     cursor: pointer;
+   }
+
+   .button:hover {
+     background-color: #ddd;
+   }
+ </style>
+</head>
+<body>
+ <div id="score">0</div>
+ <div class="buttons">
+   <button class="button" onclick="addScore(1)">+1</button>
+   <button class="button" onclick="addScore(2)">+2</button>
+   <button class="button" onclick="addScore(3)">+3</button>
+   <button class="button" onclick="addScore(6)">+6</button>
+   <button class="button" onclick="removeScore(1)">-1</button>
+   <button class="button" onclick="removeScore(2)">-2</button>
+   <button class="button" onclick="removeScore(3)">-3</button>
+   <button class="button" onclick="removeScore(6)">-6</button>
+ </div>
+
+ <script>
+   function addScore(points) {
+     var score = parseInt(document.getElementById("score").innerHTML);
+     score += points;
+     document.getElementById("score").innerHTML = score;
+   }
+
+   function removeScore(points) {
+     var score = parseInt(document.getElementById("score").innerHTML);
+     score -= points;
+     document.getElementById("score").innerHTML = score;
+   }
+ </script>
+</body>
+</html>
